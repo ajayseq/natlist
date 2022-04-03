@@ -6,8 +6,8 @@ import Categorylist from './components/Categorylist';
 export const DataContext = createContext();
 
 function App() {
-  let locationID = 27;
-  let locationName = "Community Garden";
+  let locationID;
+  let locationName;
   const location = window.location.pathname.substring(1);
 
   switch (location) {
@@ -20,13 +20,20 @@ function App() {
       locationName = "Community Garden";
   }
 
+  const userData = {
+    locationID: locationID,
+    locationName: locationName
+  }
+
   return (
     <div className="App">
       <header>
         <div>{locationName} Life</div>
         <div>Nav</div>
       </header>
-      <Categorylist taxonid="1" />
+      <DataContext.Provider value={userData}>
+        <Categorylist taxonid="1" />
+      </DataContext.Provider>
     </div>
   );
 }
