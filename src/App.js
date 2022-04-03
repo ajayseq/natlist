@@ -1,7 +1,7 @@
 import {useState, createContext} from 'react';
 import './App.css';
-import { Route, Link, Redirect } from 'react-router-dom';
 import Categorylist from './components/Categorylist';
+import Nav from './components/Nav';
 
 export const DataContext = createContext();
 
@@ -9,6 +9,7 @@ function App() {
   let locationID;
   let locationName;
   const location = window.location.pathname.substring(1);
+  const [breadcrumbs, setBreadCrumbs] = useState([{name: "Home", link: "/"}]);
 
   switch (location) {
     case "garden":
@@ -21,17 +22,19 @@ function App() {
   }
 
   const userData = {
+    location: location,
     locationID: locationID,
-    locationName: locationName
+    locationName: locationName,
+    breadcrumbs: breadcrumbs
   }
 
   return (
     <div className="App">
-      <header>
-        <div>{locationName} Life</div>
-        <div>Nav</div>
-      </header>
       <DataContext.Provider value={userData}>
+        <header>
+          <div>{locationName} Life</div>
+          <Nav />
+        </header>
         <Categorylist taxonid="1" />
       </DataContext.Provider>
     </div>
