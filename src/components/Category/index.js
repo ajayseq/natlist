@@ -4,7 +4,7 @@ import {DataContext} from '../../App';
 const Category = (props) => {
   const dataContext = useContext(DataContext);
 
-  return <div>Hello</div>;
+  return <div>{props.commonname}</div>;
 
 }
 

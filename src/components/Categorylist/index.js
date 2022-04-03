@@ -27,17 +27,23 @@ const Categorylist = (props) => {
 
   }, [])
 
-  // const categories = categoryData.map((taxon) =>
-  //     <Category key={taxon.taxonid}
-  //               scientificname={taxon.scientificname}
-  //               commonname={taxon.commonname}
-  //               obs={taxon.obs}
-  //               species={taxon.species}
-  //      />
-  //   );
+  console.log('Categorylist categorydata: ', categoryData);
+
+  const categories = Object.entries(categoryData).map(([key, value]) => {
+      return (
+          <Category key={value.taxonid}
+                taxonid={value.taxonid}
+                scientificname={value.scientificname}
+                commonname={value.commonname}
+                obs={value.obs}
+                species={value.species}
+                />
+              );
+    });
 
   return (
     <div>
+      {categories}
     </div>
   );
 
