@@ -1,5 +1,6 @@
 import {useState, createContext} from 'react';
 import Categorylist from '../Categorylist';
+import Specieslist from '../Specieslist';
 import Nav from '../Nav';
 import { Link, useParams } from 'react-router-dom';
 
@@ -20,6 +21,15 @@ function Home(props) {
     setTaxonID: props.setTaxonID,
   }
 
+  let list;
+  if (props.species == "true") {
+    list = <Specieslist taxonid={props.taxonid} />;
+    console.log("Home going to specieslist");
+  } else {
+    list = <Categorylist taxonid={props.taxonid} />;
+    console.log("Home going to categorylist");
+  }
+
   console.log("Home taxonid is ", props.taxonid, id);
 
   //() => setTaxonID((id === (null || undefined)) ? 1: id);
@@ -31,7 +41,7 @@ function Home(props) {
             <div>{userData.locationName} Life</div>
             <Nav />
           </header>
-          <Categorylist taxonid={props.taxonid} />
+          {list}
         </DataContext.Provider>
     </div>
   );
