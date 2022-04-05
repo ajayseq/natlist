@@ -1,5 +1,5 @@
 import {useState, useEffect, useContext} from 'react';
-import {DataContext} from '../../App';
+import {DataContext} from '../Home';
 import Category from '../Category';
 
 const Categorylist = (props) => {
@@ -11,8 +11,11 @@ const Categorylist = (props) => {
   if (props.taxonid == 1) {
     dataUrl = `https://sicloot.com/private/lifelist/api/categories.php?locationid=`+dataContext.locationID;
   } else {
-    dataUrl = `https://sicloot.com/private/lifelist/api/subcategories.php?locationid=`+dataContext.locationID+`taxonid=`+props.taxonid;
+    dataUrl = `https://sicloot.com/private/lifelist/api/subcategories.php?locationid=`+dataContext.locationID+`&taxonid=`+props.taxonid;
   }
+
+  console.log("Categorylist taxonid is ", props.taxonid);
+  console.log(dataUrl);
 
   //make API call to retrieve categories or subcategories
   useEffect(() => {

@@ -1,42 +1,21 @@
-import {useState, createContext} from 'react';
+import {useState} from 'react';
+import { useParams } from "react-router";
 import './App.css';
-import Categorylist from './components/Categorylist';
-import Nav from './components/Nav';
-
-export const DataContext = createContext();
+import Home from './components/Home';
+import { Routes, Route, Link, Navigate } from 'react-router-dom';
 
 function App() {
-  let locationID;
-  let locationName;
-  const location = window.location.pathname.substring(1);
-  const [breadcrumbs, setBreadCrumbs] = useState([{name: "Home", link: "/"}]);
-
-  switch (location) {
-    case "garden":
-      locationID = 27;
-      locationName = "Community Garden";
-    break;
-    default:
-      locationID = 27;
-      locationName = "Community Garden";
-  }
-
-  const userData = {
-    location: location,
-    locationID: locationID,
-    locationName: locationName,
-    breadcrumbs: breadcrumbs
-  }
+  const [taxonid, setTaxonID] = useState(1);
+  //let { taxonid } = useParams();
+  //console.log("App taxonid: ", taxonid);
 
   return (
     <div className="App">
-      <DataContext.Provider value={userData}>
-        <header>
-          <div>{locationName} Life</div>
-          <Nav />
-        </header>
-        <Categorylist taxonid="1" />
-      </DataContext.Provider>
+        <Routes>
+          <Route exact path="/" element={<Home locationID="27" location="garden" locationName="Community Garden" taxonid={taxonid} setTaxonID={setTaxonID} />} />
+          <Route exact path="garden" element={<Home taxonid="1" locationID="27" location="garden" locationName="Community Garden" taxonid={taxonid} setTaxonID={setTaxonID} />} />
+          <Route path="garden/:id" element={<Home locationID="27" location="garden" locationName="Community Garden" taxonid={taxonid} setTaxonID={setTaxonID} />} />
+        </Routes>
     </div>
   );
 }

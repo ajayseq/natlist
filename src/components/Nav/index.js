@@ -1,5 +1,5 @@
 import {useContext} from 'react';
-import {DataContext} from '../../App';
+import {DataContext} from '../Home';
 import { Route, Link, Redirect } from 'react-router-dom';
 
 const Nav = () => {
