@@ -18,14 +18,8 @@ function Home(props) {
     locationName: props.locationName,
     breadcrumbs: breadcrumbs,
     setTaxonID: props.setTaxonID,
-    taxonID: props.taxonid
   }
 
-  console.log("Home taxonid is ", props.taxonid, id);
-
-  const setTaxon = () => {
-    props.setTaxonID(id);
-        }
   console.log("Home taxonid is ", props.taxonid, id);
 
   //() => setTaxonID((id === (null || undefined)) ? 1: id);
@@ -37,7 +31,7 @@ function Home(props) {
             <div>{userData.locationName} Life</div>
             <Nav />
           </header>
-          <Categorylist taxonid={userData.taxonID} />
+          <Categorylist taxonid={props.taxonid} />
         </DataContext.Provider>
     </div>
   );

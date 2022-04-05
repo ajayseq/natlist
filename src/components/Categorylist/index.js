@@ -28,7 +28,7 @@ const Categorylist = (props) => {
     }
     makeApiCall()
 
-  }, [])
+  }, [props.taxonid])
 
   console.log('Categorylist categorydata: ', categoryData);
 

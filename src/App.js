@@ -13,7 +13,7 @@ function App() {
     <div className="App">
         <Routes>
           <Route exact path="/" element={<Home locationID="27" location="garden" locationName="Community Garden" taxonid={taxonid} setTaxonID={setTaxonID} />} />
-          <Route exact path="garden" element={<Home taxonid="1" locationID="27" location="garden" locationName="Community Garden" taxonid={taxonid} setTaxonID={setTaxonID} />} />
+          <Route exact path="garden" element={<Home locationID="27" location="garden" locationName="Community Garden" taxonid={taxonid} setTaxonID={setTaxonID} />} />
           <Route path="garden/:id" element={<Home locationID="27" location="garden" locationName="Community Garden" taxonid={taxonid} setTaxonID={setTaxonID} />} />
         </Routes>
     </div>
