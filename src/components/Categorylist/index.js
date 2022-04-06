@@ -5,6 +5,7 @@ import Category from '../Category';
 const Categorylist = (props) => {
   const [categoryData, setCategoryData] = useState('');
   const dataContext = useContext(DataContext);
+  const categoryColors = ["#ad291d", "#D29B59", "#f1ad0c", "#f77c17", "#914d39", "#678533", "#C17541", "#A24F46", "#8E4D63", "#D29B59", "#ad291d", "#ad291d", "#ad291d", "#ad291d"];
   let dataUrl;
 
   //use categories for top-level categories else go to subcategories of the given taxon
@@ -17,7 +18,7 @@ const Categorylist = (props) => {
   console.log("Categorylist taxonid is ", props.taxonid);
   console.log(dataUrl);
 
-  //make API call to retrieve categories or subcategories
+  //make API call to retrieve categories or subcategories52
   useEffect(() => {
     const makeApiCall = () => {
       fetch(dataUrl)
@@ -30,9 +31,7 @@ const Categorylist = (props) => {
 
   }, [props.taxonid])
 
-  console.log('Categorylist categorydata: ', categoryData);
-
-  const categories = Object.entries(categoryData).map(([key, value]) => {
+  const categories = Object.entries(categoryData).map(([key, value], index) => {
       return (
           <Category key={value.taxonid}
                 taxonid={value.taxonid}
@@ -40,6 +39,7 @@ const Categorylist = (props) => {
                 commonname={value.commonname}
                 obs={value.obs}
                 species={value.species}
+                backgroundColor={categoryColors[index]}
                 />
               );
     });
