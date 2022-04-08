@@ -1,7 +1,6 @@
 import {useContext} from 'react';
 import {DataContext} from '../Home';
 import { Link } from 'react-router-dom';
-import { Button } from 'reactstrap';
 import { LinkContainer } from 'react-router-bootstrap'
 import './category.css';
 
@@ -36,13 +35,13 @@ const Category = (props) => {
   const calcImage = () => {
     switch (props.commonname) {
       case 'Birds':
-        return (<img src={bird} width="30"></img>);
+        return (<img src={bird} width="40"></img>);
         break;
       case 'Arthropods':
-        return (<img src={insect} width="30"></img>);
+        return (<img src={insect} width="40"></img>);
         break;
       case 'Mollusks':
-        return (<img src={snail} width="30"></img>);
+        return (<img src={snail} width="35"></img>);
         break;
       case 'Fungi':
         return (<img src={mushroom} width="30"></img>);
@@ -54,7 +53,7 @@ const Category = (props) => {
         return (<img src={deer} width="30"></img>);
         break;
       case 'Reptiles':
-        return (<img src={snake} width="30"></img>);
+        return (<img src={snake} width="40"></img>);
         break;
       case 'Fish':
         return (<img src={fish} width="30"></img>);

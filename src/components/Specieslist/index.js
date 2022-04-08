@@ -23,9 +23,26 @@ const Specieslist = (props) => {
 
   }, [props.taxonid])
 
+  //whether to add the beginning or end of a flex
+  // const flexStart = (index) => {
+  //   if (index % 2 === 1) {
+  //     return `<div className="d-flex flex-row">`;
+  //   } else {
+  //     return '';
+  //   }
+  // };
+  //
+  // const flexEnd = (index) => {
+  //   if (index % 2 === 0) {
+  //     return "</div>";
+  //   } else {
+  //     return '';
+  //   }
+  // };
+
   console.log('Specieslist categorydata: ', categoryData);
 
-  const species = Object.entries(categoryData).map(([key, value]) => {
+  const species = Object.entries(categoryData).map(([key, value], index) => {
       return (
           <Species key={value.taxonid}
                 taxonid={value.taxonid}
@@ -35,12 +52,14 @@ const Specieslist = (props) => {
                 total={value.total}
                 max={value.max}
                 image={value.image}
+                imagewidth={value.imagewidth}
+                imageheight={value.imageheight}
                 />
-              );
-    });
+        );
+      });
 
   return (
-    <div>
+    <div className="inline-flex flex-wrap p-2 place-content-center">
       {species}
     </div>
   );
