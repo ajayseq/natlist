@@ -15,6 +15,8 @@ const Categorylist = (props) => {
     dataUrl = `https://sicloot.com/private/lifelist/api/subcategories.php?locationid=`+dataContext.locationID+`&taxonid=`+props.taxonid;
   }
 
+  //dataContext.setBreadCrumbs(...[{name: "Category", link: "category"}]);
+
   console.log("Categorylist taxonid is ", props.taxonid);
   console.log(dataUrl);
 

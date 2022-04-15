@@ -12,7 +12,7 @@ function Home(props) {
   let {id} = useParams();
   id = (id === (null || undefined) ? 1: id);
 
-  const [breadcrumbs, setBreadCrumbs] = useState([{name: "Home", link: "/"}]);
+  const [breadcrumbs, setBreadCrumbs] = useState([{name: "Home", link: ""}]);
   const [level, setLevel] = useState('');
 
   const userData = {
@@ -20,6 +20,7 @@ function Home(props) {
     locationID: props.locationID,
     locationName: props.locationName,
     breadcrumbs: breadcrumbs,
+    setBreadCrumbs: setBreadCrumbs,
     setTaxonID: props.setTaxonID,
     level: level
   }

@@ -3,6 +3,7 @@ import {DataContext} from '../Home';
 import { Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Card, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
+import parse from 'html-react-parser';
 import './species.css';
 
 const Species = (props) => {
@@ -30,12 +31,12 @@ const Species = (props) => {
     let monthLabel = '';
     //console.log('calcMonths: props.months', props.months);
     if (props.months && props.months.length > 0) {
-      for (let i = 0; i < 12; i++) {
+      for (let i = 1; i <= 12; i++) {
         if (props.months.includes(i.toString())) {
-          monthLabel += 'X';
+          monthLabel += '<span className="text-gray-700">X</span>';
         }
         else {
-          monthLabel += ' ';
+          monthLabel += '<span className="text-gray-200">X</span>';
         }
       }
       console.log('calcMonths monthLabel', monthLabel);
@@ -74,10 +75,10 @@ const Species = (props) => {
           </p>
         </div>
         <div className="px-3 pt-2 pb-1">
-          <span className="font-mono inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Years seen: {calcYears()}</span>
+          <span className="font-mono inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{calcYears()}</span>
         </div>
-        <div className="px-3 pt-2 pb-1">
-          <span className="font-mono tracking-[.5em] inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">JFMAMJJASOND<br />{calcMonths()}</span>
+        <div className="min-w-400 px-3 pt-2 pb-1">
+          <span className="font-mono tracking-[.5em] inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">JFMAMJJASOND<br />{parse(calcMonths())}</span>
         </div>
       </button>
     </LinkContainer>
