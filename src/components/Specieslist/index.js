@@ -55,6 +55,8 @@ const Specieslist = (props) => {
                 image={value.image}
                 imagewidth={value.imagewidth}
                 imageheight={value.imageheight}
+                years={value.years}
+                months={value.months}
                 />
         );
       });

@@ -26,6 +26,36 @@ const Species = (props) => {
     }
   };
 
+  const calcMonths = () => {
+    let monthLabel = '';
+    //console.log('calcMonths: props.months', props.months);
+    if (props.months && props.months.length > 0) {
+      for (let i = 0; i < 12; i++) {
+        if (props.months.includes(i.toString())) {
+          monthLabel += 'X';
+        }
+        else {
+          monthLabel += ' ';
+        }
+      }
+      console.log('calcMonths monthLabel', monthLabel);
+      return monthLabel;
+    }
+    return '';
+  };
+
+  const calcYears = () => {
+    let yearLabel = '';
+
+    if (props.years && props.years.length > 0) {
+      for (let i=0; i<props.years.length; i++) {
+          yearLabel += props.years[i] + ' ';
+      }
+      return yearLabel;
+    }
+    return '';
+  };
+
   //using tailwind css
   return (
     <LinkContainer to={'/'+dataContext.location+'/obs/'+props.taxonid}>
@@ -44,7 +74,10 @@ const Species = (props) => {
           </p>
         </div>
         <div className="px-3 pt-2 pb-1">
-          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
+          <span className="font-mono inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Years seen: {calcYears()}</span>
+        </div>
+        <div className="px-3 pt-2 pb-1">
+          <span className="font-mono tracking-[.5em] inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">JFMAMJJASOND<br />{calcMonths()}</span>
         </div>
       </button>
     </LinkContainer>
