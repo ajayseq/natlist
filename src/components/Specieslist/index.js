@@ -12,6 +12,7 @@ const Specieslist = (props) => {
 
   //make API call to retrieve categories or subcategories
   useEffect(() => {
+    console.log('in specieslist useEffect');
     const makeApiCall = () => {
       fetch(dataUrl)
       .then(res => res.json())
