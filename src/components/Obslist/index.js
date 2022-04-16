@@ -3,7 +3,7 @@ import {DataContext} from '../Home';
 import Obs from '../Obs';
 
 const Obslist = (props) => {
-  const [obsData, setObsData] = useState('');
+  const [obsData, setObsData] = useState({ obs: [] });
   const dataContext = useContext(DataContext);
   let dataUrl = `https://sicloot.com/private/lifelist/api/observations.php?locationid=`+dataContext.locationID+`&taxonid=`+props.taxonid;
 
@@ -12,7 +12,6 @@ const Obslist = (props) => {
 
   //make API call to retrieve categories or subcategories
   useEffect(() => {
-    console.log('in obslist useEffect');
     const makeApiCall = () => {
       fetch(dataUrl)
       .then(res => res.json())
@@ -25,31 +24,32 @@ const Obslist = (props) => {
 
   }, [dataContext.level])
 
-  console.log('Obslist obsdata: ', obsData);
+  console.log('Obslist obsdata obs: ', obsData.obs);
   console.log('Obslist props level is ', dataContext.level);
 
-
-  const obs = obsData.obs.map(([key, value], index) => {
-      console.log('obsData.obs is ', obsData.obs);
-      console.log('value is ', value);
+  const obs = obsData.obs.map((obj, index) => {
+      console.log('obs time and count is ', obj.starttime, obj.count);
         return (
             <Obs  key={index}
-                  taxonid={obsData.taxonid}
-                  scientificname={obsData.scientificname}
-                  commonname={obsData.commonname}
-                  starttime={value.starttime}
-                  idlink={value.idlink}
-                  count={value.count}
-                  images={value.images}
-                  //imagewidth={value.imagewidth}
+                  starttime={obj.starttime}
+                  idlink={obj.idlink}
+                  count={obj.count}
+                  images={obj.images}
+                  //imagewidt h={value.imagewidth}
                   //imageheight={value.imageheight}
                   />
           );
   });
 
   return (
-    <div className="inline-flex flex-wrap p-2 place-content-center">
-      {obs}
+    <div className="place-content-center">
+      <div>
+          <h2>{obsData.commonname}</h2><br />
+          <h4 className="italic">{obsData.scientificname}</h4>
+      </div>
+      <div className="inline-flex flex-wrap p-2 place-content-center">
+        {obs}
+      </div>
     </div>
   );
 

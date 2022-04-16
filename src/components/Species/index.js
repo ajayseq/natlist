@@ -39,7 +39,6 @@ const Species = (props) => {
           monthLabel += '<span className="text-gray-200">X</span>';
         }
       }
-      console.log('calcMonths monthLabel', monthLabel);
       return monthLabel;
     }
     return '';
@@ -60,7 +59,7 @@ const Species = (props) => {
   //using tailwind css
   return (
     <LinkContainer to={'/'+dataContext.location+'/obs/'+props.taxonid}>
-      <button className="w-500 p-2 m-2 rounded overflow-hidden border-2 border-black">
+      <button className="w-500 p-2 m-2 rounded overflow-hidden border-2 border-black" onClick={() => handleClick(props.taxonid)}>
         {calcImageLink()}
         <div className="px-2 pt-2">
           <div className="font-bold text-xl leading-5">{props.commonname}<br />
@@ -69,7 +68,7 @@ const Species = (props) => {
             </span>
           </div>
           <p className="text-gray-700 text-xs">
-            <Link to={`/${dataContext.location}/obs/${props.taxonid}`} onClick={() => handleClick(props.taxonid)}>Obs: {props.obs}</Link>&nbsp;&nbsp;&nbsp;
+            Obs: {props.obs}&nbsp;&nbsp;&nbsp;
             Total: {props.total}&nbsp;&nbsp;&nbsp;
             High Count: {props.max}
           </p>
