@@ -49,7 +49,7 @@ function Home(props) {
   //() => setTaxonID((id === (null || undefined)) ? 1: id);
 
   return (
-    <div className="App">
+    <div className="">
         <DataContext.Provider value={userData}>
           <header>
             <div>{userData.locationName} Life</div>

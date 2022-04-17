@@ -27,7 +27,7 @@ const Obs = (props) => {
                   src={"https://sicloot.com/private/lifelist/photos/"+obj.image}
                   width={obj.imagewidth}
                   height={obj.imageheight}
-                  className="block mx-auto"
+                  className="block mx-auto p-1"
                   />
           );
   });
@@ -53,11 +53,11 @@ const Obs = (props) => {
         <div className="px-3 pt-2 pb-1">
           <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{starttime()}</span>
         </div>
-        <div className="flex">
+        <div className="inline-flex flex-wrap">
           {images}
         </div>
         <div className="px-2 pt-2">
-          <p className="text-gray-700 text-xs">
+          <p className="text-gray-700 text-sm">
             Count: {props.count}{calcIDLink()}
           </p>
         </div>
