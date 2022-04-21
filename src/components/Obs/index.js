@@ -1,9 +1,11 @@
-import {useContext} from 'react';
+import {useState, useContext} from 'react';
 import {DataContext} from '../Home';
 import moment from 'moment';
+import { Tooltip, Button } from 'reactstrap';
 
 const Obs = (props) => {
   const dataContext = useContext(DataContext);
+  const [tooltipOpen, setTooltipOpen] = useState(false);
 
   const starttime = () => {
     return moment(props.starttime).format('YYYY-MM-DD h:mma');
@@ -40,7 +42,15 @@ const Obs = (props) => {
       return (
           <>
            <span>&nbsp;&nbsp;&nbsp;</span>
-           <a href={props.idlink}>ID Link</a>
+             <Button id="IDToolTip" color="link"><a href={props.idlink}>ID Link</a></Button>
+                         <Tooltip
+                             isOpen={tooltipOpen}
+                             placement="right"
+                             target="IDToolTip"
+                             toggle={() => { setTooltipOpen(!tooltipOpen) }}>
+                             Sample Tooltip Text...
+                         </Tooltip>
+
           </>
       );
     }
