@@ -12,7 +12,7 @@ function Home(props) {
   let {id} = useParams();
   id = (id === (null || undefined) ? 1: id);
 
-  const [breadcrumbs, setBreadCrumbs] = useState([{name: "Home", link: ""}]);
+  const [breadcrumbs, setBreadCrumbs] = useState([{name: "Home", link: "/"+ props.location}]);
   const [level, setLevel] = useState('');
 
   const userData = {

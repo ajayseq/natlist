@@ -19,6 +19,7 @@ const Category = (props) => {
 
   const handleClick = (taxonID) => {
     dataContext.setTaxonID(taxonID);
+    dataContext.setBreadCrumbs(breadcrumbs => [...breadcrumbs, {name: props.commonname, link: calcLink()}] );
     console.log('Category handleClick taxonid set to ', taxonID);
   };
 

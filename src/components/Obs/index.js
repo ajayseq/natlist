@@ -53,6 +53,7 @@ const Obs = (props) => {
     }
   }, [])
 
+  //Reactstrap Container and Row would not work inside tooltip so using html table
   const iNaturalistIDs = (data) => {
     let idText = '';
 
@@ -61,7 +62,7 @@ const Obs = (props) => {
       data.results[0].identifications.forEach(id => {
         if (JSON.parse(id.current)) {
           idText += '<tr><td valign="top">' + id.user.login + ':';
-          if ((id.user.name.length > 0) && (id.user.name !== 'sicloot')) {
+          if ((id.user.name) && (id.user.name.length > 0) && (id.user.name !== 'sicloot')) {
             idText += '<br />(' + id.user.name + ')';
           }
           idText += '</td><td valign="top">&nbsp;&nbsp;<i>' + id.taxon.name + '</i>';
@@ -109,14 +110,12 @@ const Obs = (props) => {
       <div className="p-2 m-2 rounded overflow-hidden border-2 border-black">
         <div className="px-3 pt-2 pb-1">
           <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{starttime()}</span>
+          <span className="text-gray-700 text-sm">
+            Count: {props.count}{calcIDLink()}
+          </span>
         </div>
         <div className="inline-flex flex-wrap">
           {images}
-        </div>
-        <div className="px-2 pt-2">
-          <p className="text-gray-700 text-sm">
-            Count: {props.count}{calcIDLink()}
-          </p>
         </div>
       </div>
   );
