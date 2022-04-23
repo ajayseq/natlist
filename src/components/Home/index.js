@@ -4,6 +4,8 @@ import Specieslist from '../Specieslist';
 import Obslist from '../Obslist';
 import Nav from '../Nav';
 import { Link, useParams } from 'react-router-dom';
+import leaf_left from './leaf_left.png';
+import leaf_right from './leaf_right.png';
 
 export const DataContext = createContext();
 
@@ -52,7 +54,11 @@ function Home(props) {
     <div className="">
         <DataContext.Provider value={userData}>
           <header>
-            <div>{userData.locationName} Life</div>
+            <div className="bg-[#E3A87B] text-4xl py-3 flex space-x-5 justify-center">
+              <img src={leaf_left} width="100px" />
+              <span>{userData.locationName} Life</span>
+              <img src={leaf_right} width="100px" />
+            </div>
             <Nav />
           </header>
           {list}

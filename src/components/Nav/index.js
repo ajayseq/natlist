@@ -14,8 +14,8 @@ const Nav = () => {
     console.log('nav linkTaxon: ', linkTaxon);
     return (
       <>
-        { (index > 0) ? parse('<li><span className="text-white mx-2">/</span></li>') : '' }
-        <li className="text-center"><Link key={index} to={element.link} className="text-blue-100 hover:text-blue-800" onClick={() => handleClick(index, linkTaxon)}>{element.name}</Link></li>
+        { (index > 0) ? parse('<li><span className="text-[#2D2219] mx-2">/</span></li>') : '' }
+        <li className="text-center"><Link key={index} to={element.link} className="text-[#2D2219] hover:text-blue-800" onClick={() => handleClick(index, linkTaxon)}>{element.name}</Link></li>
       </>
     );
   });
@@ -29,15 +29,15 @@ const Nav = () => {
     console.log('Nav handleClick taxonid set to ', taxonID);
   };
 
-  console.log('links is ', links);
+  //console.log('links is ', links);
 
   //navbar css from tailwind-elements.com
   //return <div><Link to={`/${dataContext.location}/${dataContext.breadcrumbs[0].link}`}>{dataContext.breadcrumbs[0].name}</Link></div>;
   return (
-    <nav className="relative w-full flex flex-wrap items-center justify-between py-3 bg-gray-400 text-xl text-gray-500 hover:text-gray-700 focus:text-gray-700 shadow-lg navbar navbar-expand-lg navbar-light">
+    <nav className="relative w-full flex flex-wrap items-center justify-between py-3 bg-[#F1D4BD] text-xl text-gray-500 hover:text-gray-700 focus:text-gray-700 shadow-lg navbar navbar-expand-lg navbar-light">
       <div className="container-fluid w-full flex flex-wrap items-center justify-between px-6">
         <nav className="bg-grey-light rounded-md w-full" aria-label="breadcrumb">
-          <ol className="list-reset flex justify-center">
+          <ol className="list-reset flex justify-center mr-8">
             {links}
           </ol>
         </nav>

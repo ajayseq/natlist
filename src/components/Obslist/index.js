@@ -44,8 +44,8 @@ const Obslist = (props) => {
   return (
     <div className="">
       <div>
-          <h2>{obsData.commonname}</h2><br />
-          <h4 className="italic">{obsData.scientificname}</h4>
+          <h2 className="mt-2">{obsData.commonname}</h2><br />
+          <h4 className="italic -mt-8">{obsData.scientificname}</h4>
       </div>
       <div className="inline-flex flex-wrap p-2 place-content-left text-left">
         {obs}
