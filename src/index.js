@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
+    <Router basename={'/natlist'}>
       <App />
     </Router>
   </React.StrictMode>,
