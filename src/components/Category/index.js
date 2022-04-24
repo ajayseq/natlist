@@ -25,6 +25,9 @@ const Category = (props) => {
 
   //if less than 30 species, list out the species, otherwise go to a subcategory
   const calcLink = () => {
+    if (props.commonname === "Birds") {
+      return '/'+dataContext.location+'/species/'+props.taxonid;
+    }
     if (props.species > 30) {
       return '/'+dataContext.location+'/'+props.taxonid;
     } else {
