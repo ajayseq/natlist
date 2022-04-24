@@ -1,9 +1,9 @@
 import {useContext} from 'react';
 import {DataContext} from '../Home';
-import { Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap'
 import './category.css';
 
+//images for use on category buttons
 import bird from './bird.png';
 import insect from './insect.png';
 import snail from './snail.png';
@@ -19,17 +19,16 @@ const Category = (props) => {
 
   const handleClick = (taxonID) => {
     dataContext.setTaxonID(taxonID);
+    //add link to this category in the nav
     dataContext.setBreadCrumbs(breadcrumbs => [...breadcrumbs, {name: props.commonname, link: calcLink(), taxon: taxonID}] );
-    console.log('Category handleClick taxonid set to ', taxonID);
-    console.log('Category breadcrumbs: ', dataContext.breadcrumbs);
   };
 
-  //if less than 30 species, list out the species, otherwise go to a subcategory
+  //if less than 40 species, list out the species, otherwise go to a subcategory
   const calcLink = () => {
     if (props.commonname === "Birds") {
       return '/'+dataContext.location+'/species/'+props.taxonid;
     }
-    if (props.species > 30) {
+    if (props.species > 40) {
       return '/'+dataContext.location+'/'+props.taxonid;
     } else {
       return '/'+dataContext.location+'/species/'+props.taxonid;
@@ -40,31 +39,31 @@ const Category = (props) => {
   const calcImage = () => {
     switch (props.commonname) {
       case 'Birds':
-        return (<img src={bird} width="40"></img>);
+        return (<img src={bird} width="40" alt="bird"></img>);
         break;
       case 'Arthropods':
-        return (<img src={insect} width="40"></img>);
+        return (<img src={insect} width="40" alt="insect"></img>);
         break;
       case 'Mollusks':
-        return (<img src={snail} width="35"></img>);
+        return (<img src={snail} width="35" alt="snail"></img>);
         break;
       case 'Fungi':
-        return (<img src={mushroom} width="30"></img>);
+        return (<img src={mushroom} width="30" alt="mushrooms"></img>);
         break;
       case 'Plants':
-        return (<img src={plant} width="30"></img>);
+        return (<img src={plant} width="30" alt="plant with flowers"></img>);
         break;
       case 'Mammals':
-        return (<img src={deer} width="30"></img>);
+        return (<img src={deer} width="30" alt="deer"></img>);
         break;
       case 'Reptiles':
-        return (<img src={snake} width="40"></img>);
+        return (<img src={snake} width="40" alt="snake"></img>);
         break;
       case 'Fish':
-        return (<img src={fish} width="30"></img>);
+        return (<img src={fish} width="30" alt="fish"></img>);
         break;
       case 'Annelids':
-        return (<img src={worm} width="30"></img>);
+        return (<img src={worm} width="30" alt="worm"></img>);
         break;
       default:
         return '';

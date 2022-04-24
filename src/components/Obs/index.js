@@ -1,51 +1,39 @@
-import {useState, useContext, useEffect} from 'react';
-import {DataContext} from '../Home';
+import {useState, useEffect} from 'react';
 import moment from 'moment';
-import { Tooltip, Button } from 'reactstrap';
+import { Tooltip } from 'reactstrap';
 import parse from 'html-react-parser';
 
 const Obs = (props) => {
-  const dataContext = useContext(DataContext);
   const [tooltipOpen, setTooltipOpen] = useState(false);
   const [iNatData, setINatData] = useState();
   let iNaturalistObsID = props.idlink.slice(props.idlink.lastIndexOf("/")+1, props.idlink.length);
   let dataUrl = `https://api.inaturalist.org/v1/observations/` + iNaturalistObsID;
 
+  //use Moment to format the date and time
   const starttime = () => {
     return moment(props.starttime).format('YYYY-MM-DD h:mma');
   };
 
-  //if no image, do not provide link
-  // const calcImageLink = () => {
-  //   if (props.images.length < 1) {
-  //     return '';
-  //   } else {
-  //     return (
-  //         <img src={"https://sicloot.com/private/lifelist/photos/"+props.image} width={props.imagewidth} height={props.imageheight} className="block mx-auto"/>
-  //     );
-  //   }
-  //   return '';
-  // };
-
+  //all images
   const images = props.images.map((obj, index) => {
         return (
             <img  key={index}
                   src={"https://sicloot.com/private/lifelist/photos/"+obj.image}
                   width={obj.imagewidth}
                   height={obj.imageheight}
+                  alt=""
                   className="block mx-auto p-1"
                   />
           );
   });
 
+  //retrieve all identifications from iNaturalist API
   useEffect(() => {
     const makeApiCall = () => {
       fetch(dataUrl)
       .then(res => res.json())
       .then(data =>  {
         setINatData(data);
-        console.log('iNaturalist API URL: ', dataUrl);
-        console.log('iNaturalist data: ', data.results[0].identifications);
        });
     }
     if (props.idlink.length > 1) {
@@ -54,6 +42,7 @@ const Obs = (props) => {
   }, [])
 
   //Reactstrap Container and Row would not work inside tooltip so using html table
+  //get tooltip text with iNaturalist identification date
   const iNaturalistIDs = (data) => {
     let idText = '';
 
@@ -77,7 +66,6 @@ const Obs = (props) => {
       });
       idText += '</table>';
     }
-    console.log('idText: ', idText);
     return idText;
   }
 
@@ -103,7 +91,6 @@ const Obs = (props) => {
           </>
       );
     }
-    return '';
   };
 
   //using tailwind css
@@ -120,7 +107,6 @@ const Obs = (props) => {
         </div>
       </div>
   );
-
 }
 
 export default Obs;

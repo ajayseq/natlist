@@ -7,12 +7,8 @@ const Specieslist = (props) => {
   const dataContext = useContext(DataContext);
   let dataUrl = `https://sicloot.com/private/lifelist/api/specieslist.php?locationid=`+dataContext.locationID+`&taxonid=`+props.taxonid;
 
-  console.log("Specieslist taxonid is ", props.taxonid);
-  console.log(dataUrl);
-
-  //make API call to retrieve categories or subcategories
+  //make API call to retrieve list of species
   useEffect(() => {
-    console.log('in specieslist useEffect');
     const makeApiCall = () => {
       fetch(dataUrl)
       .then(res => res.json())
@@ -23,25 +19,6 @@ const Specieslist = (props) => {
     makeApiCall()
 
   }, [props.taxonid])
-
-  //whether to add the beginning or end of a flex
-  // const flexStart = (index) => {
-  //   if (index % 2 === 1) {
-  //     return `<div className="d-flex flex-row">`;
-  //   } else {
-  //     return '';
-  //   }
-  // };
-  //
-  // const flexEnd = (index) => {
-  //   if (index % 2 === 0) {
-  //     return "</div>";
-  //   } else {
-  //     return '';
-  //   }
-  // };
-
-  console.log('Specieslist categorydata: ', categoryData);
 
   const species = Object.entries(categoryData).map(([key, value], index) => {
       return (
@@ -66,7 +43,6 @@ const Specieslist = (props) => {
       {species}
     </div>
   );
-
 }
 
 export default Specieslist;

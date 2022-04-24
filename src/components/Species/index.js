@@ -1,35 +1,31 @@
 import {useContext} from 'react';
 import {DataContext} from '../Home';
-import { Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Card, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
 import parse from 'html-react-parser';
-import './species.css';
 
 const Species = (props) => {
   const dataContext = useContext(DataContext);
 
   const handleClick = (taxonID) => {
     dataContext.setTaxonID(taxonID);
-    console.log('Species handleClick taxonid set to ', taxonID);
   };
 
-  //if no image, do not provide link
+  //if no image, do not provide image URL
   const calcImageLink = () => {
     if (props.image.length < 1) {
       return '';
     } else {
       return (
         <div>
-          <img src={"https://sicloot.com/private/lifelist/photos/"+props.image} width={props.imagewidth} height={props.imageheight} className="block mx-auto"/>
+          <img src={"https://sicloot.com/private/lifelist/photos/"+props.image} width={props.imagewidth} height={props.imageheight} alt="" className="block mx-auto"/>
         </div>
       );
     }
   };
 
+  //put an X below each month where the species was observed
   const calcMonths = () => {
     let monthLabel = '';
-    //console.log('calcMonths: props.months', props.months);
     if (props.months && props.months.length > 0) {
       for (let i = 1; i <= 12; i++) {
         if (props.months.includes(i.toString())) {
@@ -44,6 +40,7 @@ const Species = (props) => {
     return '';
   };
 
+  //list all years where the species was seen
   const calcYears = () => {
     let yearLabel = '';
 
@@ -56,7 +53,6 @@ const Species = (props) => {
     return '';
   };
 
-  //using tailwind css
   return (
     <LinkContainer to={'/'+dataContext.location+'/obs/'+props.taxonid}>
       <button className="w-500 p-2 m-2 rounded overflow-hidden border-2 border-black" onClick={() => handleClick(props.taxonid)}>
@@ -82,25 +78,6 @@ const Species = (props) => {
       </button>
     </LinkContainer>
   );
-
-  // return (
-  //   <Card body className="text-left" color="light">
-  //     <CardBody>
-  //       <CardTitle tag="h3">
-  //         {props.commonname}
-  //       </CardTitle>
-  //       <CardSubtitle className="mb-2 text-muted" tag="h5">
-  //         {props.scientificname}
-  //       </CardSubtitle>
-  //     <div>{props.species} species</div>
-  //     <div><Link to={`/${dataContext.location}/obs/${props.taxonid}`} onClick={() => handleClick(props.taxonid)}>{props.obs} observations</Link></div>
-  //     <div>{props.total} total</div>
-  //     <div>{props.max} high count</div>
-  //     <div><img src={"https://sicloot.com/private/lifelist/photos/"+props.image} /></div>
-  //     </CardBody>
-  //   </Card>
-  // );
-
 }
 
 export default Species;
