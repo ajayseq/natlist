@@ -23,9 +23,7 @@ const Nav = (props) => {
 
   //if back button is clicked, reset nav to current category
   useEffect(() => {
-    console.log(' in nav useEffect');
     dataContext.breadcrumbs.forEach((crumb, index) => {
-      console.log('nav checking bread crumbs ', crumb.taxon, props.taxonid, index);
       if (crumb.taxon === props.taxonid.toString()) {
         dataContext.setBreadCrumbs(breadcrumbs => breadcrumbs.slice(0, index + 1));
       }
