@@ -19,8 +19,9 @@ const Category = (props) => {
 
   const handleClick = (taxonID) => {
     dataContext.setTaxonID(taxonID);
-    dataContext.setBreadCrumbs(breadcrumbs => [...breadcrumbs, {name: props.commonname, link: calcLink()}] );
+    dataContext.setBreadCrumbs(breadcrumbs => [...breadcrumbs, {name: props.commonname, link: calcLink(), taxon: taxonID}] );
     console.log('Category handleClick taxonid set to ', taxonID);
+    console.log('Category breadcrumbs: ', dataContext.breadcrumbs);
   };
 
   //if less than 30 species, list out the species, otherwise go to a subcategory

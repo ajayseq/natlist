@@ -3,7 +3,6 @@ import {DataContext} from '../Home';
 import moment from 'moment';
 import { Tooltip, Button } from 'reactstrap';
 import parse from 'html-react-parser';
-import {Link} from 'react-router-dom';
 
 const Obs = (props) => {
   const dataContext = useContext(DataContext);
@@ -90,7 +89,7 @@ const Obs = (props) => {
     return (
           <>
            <span>&nbsp;&nbsp;&nbsp;</span>
-             <Link to={props.idlink}>
+             <a href={props.idlink}>
                <button id={'IDToolTip' + iNaturalistObsID} className="bg-[#E3A87B] hover:bg-blue-300 text-white font-bold py-2 px-4 rounded-full">ID Ref</button>
                          <Tooltip
                              style={{maxWidth: '700px', textAlign: 'left', color: 'orange'}}
@@ -100,7 +99,7 @@ const Obs = (props) => {
                              toggle={() => { setTooltipOpen(!tooltipOpen) }}>
                              {parse(iNaturalistIDs(iNatData))}
                          </Tooltip>
-             </Link>
+             </a>
           </>
       );
     }

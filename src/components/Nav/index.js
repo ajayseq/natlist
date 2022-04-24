@@ -1,21 +1,21 @@
-import {useContext} from 'react';
+import {useContext, useEffect} from 'react';
 import {DataContext} from '../Home';
 import { Route, Link, Redirect } from 'react-router-dom';
 import parse from 'html-react-parser';
 
-const Nav = () => {
+const Nav = (props) => {
   const dataContext = useContext(DataContext);
 
   const links = dataContext.breadcrumbs.map((element, index) => {
-    let linkTaxon = element.link.slice(element.link.lastIndexOf("/")+1, element.link.length);
-    if (isNaN(linkTaxon)) {
-      linkTaxon = '1';
-    }
-    console.log('nav linkTaxon: ', linkTaxon);
+    // let linkTaxon = element.link.slice(element.link.lastIndexOf("/")+1, element.link.length);
+    // if (isNaN(linkTaxon)) {
+    //   linkTaxon = '1';
+    // }
+    // console.log('nav linkTaxon: ', linkTaxon);
     return (
       <>
         { (index > 0) ? parse('<li><span className="text-[#2D2219] mx-2">/</span></li>') : '' }
-        <li className="text-center"><Link key={index} to={element.link} className="text-[#2D2219] hover:text-blue-800" onClick={() => handleClick(index, linkTaxon)}>{element.name}</Link></li>
+        <li className="text-center"><Link key={index} to={element.link} className="text-[#2D2219] hover:text-blue-800" onClick={() => handleClick(index, element.taxon)}>{element.name}</Link></li>
       </>
     );
   });
@@ -28,6 +28,17 @@ const Nav = () => {
     dataContext.setTaxonID(taxonID);
     console.log('Nav handleClick taxonid set to ', taxonID);
   };
+
+  //if back button is clicked, reset nav to current category
+  useEffect(() => {
+    console.log(' in nav useEffect');
+    dataContext.breadcrumbs.forEach((crumb, index) => {
+      console.log('nav checking bread crumbs ', crumb.taxon, props.taxonid, index);
+      if (crumb.taxon === props.taxonid.toString()) {
+        dataContext.setBreadCrumbs(breadcrumbs => breadcrumbs.slice(0, index + 1));
+      }
+    });
+  }, [props.taxonid])
 
   //console.log('links is ', links);
 

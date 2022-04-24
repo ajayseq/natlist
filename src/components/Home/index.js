@@ -14,7 +14,7 @@ function Home(props) {
   let {id} = useParams();
   id = (id === (null || undefined) ? 1: id);
 
-  const [breadcrumbs, setBreadCrumbs] = useState([{name: "Home", link: "/"+ props.location}]);
+  const [breadcrumbs, setBreadCrumbs] = useState([{name: "Home", link: "/"+ props.location, taxon: "1"}]);
   const [level, setLevel] = useState('');
 
   const userData = {
@@ -31,18 +31,18 @@ function Home(props) {
   if (props.species == "true") {
     if (level != "species")
       setLevel("species");
-    list = <Specieslist taxonid={props.taxonid} />;
+    list = <Specieslist taxonid={id} />;
     console.log("Home going to specieslist");
   } else if (props.obs == "true") {
     if (level != "obs")
       setLevel("obs");
     console.log('Home level: ', level);
-    list = <Obslist taxonid={props.taxonid} />;
+    list = <Obslist taxonid={id} />;
     console.log("Home going to obslist");
   } else {
     if (level != "category")
       setLevel("category");
-    list = <Categorylist taxonid={props.taxonid} />;
+    list = <Categorylist taxonid={id} />;
     console.log("Home going to categorylist");
   }
 
@@ -59,7 +59,7 @@ function Home(props) {
               <span>{userData.locationName} Life</span>
               <img src={leaf_right} width="100px" />
             </div>
-            <Nav />
+            <Nav taxonid={id} />
           </header>
           {list}
         </DataContext.Provider>
