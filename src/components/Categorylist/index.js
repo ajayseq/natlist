@@ -6,8 +6,11 @@ const Categorylist = (props) => {
   const [categoryData, setCategoryData] = useState('');
   const dataContext = useContext(DataContext);
   //the colors are assigned to the circular buttons for each category
-  const categoryColors = ["#ad291d", "#D29B59", "#678533", "#f77c17", "#914d39", "#f1ad0c", "#C17541", "#A24F46", "#8E4D63", "#D29B59", "#ad291d", "#ad291d", "#ad291d", "#ad291d"];
+  let categoryColors = ["#ad291d", "#D29B59", "#678533", "#f77c17", "#914d39", "#f1ad0c", "#C17541", "#A24F46", "#8E4D63", "#D29B59", "#ad291d", "#ad291d", "#ad291d", "#ad291d"];
   let dataUrl;
+
+  //randomize categoryColors so it's clear when categories change; code from flaviocopes.com
+  categoryColors.sort(() => Math.random() - 0.5);
 
   //use categories for top-level categories else go to subcategories of the given taxon
   if (props.taxonid === 1) {
