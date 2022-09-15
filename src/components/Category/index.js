@@ -78,6 +78,7 @@ const Category = (props) => {
         <div className="divImage">{calcImage()}</div>
         <div>{props.species} species</div>
         <div>{props.obs} observations</div>
+        <div>{props.needsid} need ID</div>
       </button>
     </LinkContainer>
   );

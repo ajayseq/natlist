@@ -41,6 +41,7 @@ const Categorylist = (props) => {
                 commonname={value.commonname}
                 obs={value.obs}
                 species={value.species}
+                needsid={value.needsid}
                 backgroundColor={categoryColors[index]}
                 />
               );
