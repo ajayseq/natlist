@@ -4,6 +4,7 @@ import Species from '../Species';
 
 const Specieslist = (props) => {
   const [categoryData, setCategoryData] = useState('');
+  const [nsData, setNsData] = useState('');
   const dataContext = useContext(DataContext);
   let dataUrl = `https://sicloot.com/private/lifelist/api/specieslist.php?locationid=`+dataContext.locationID+`&taxonid=`+props.taxonid;
 
@@ -39,9 +40,17 @@ const Specieslist = (props) => {
       });
 
   return (
+    <>
     <div className="inline-flex flex-wrap p-2 place-content-center">
       {species}
     </div>
+    <div className="place-content-center">
+      <br />
+      All photos and data &copy; sicloot<br />
+    Thank you to <a href="https://www.inaturalist.org/">iNaturalist</a> for help with identification<br />
+  Native and conservation status by <a href="https://explorer.natureserve.org/">NatureServe Explorer</a>
+    </div>
+    </>
   );
 }
 

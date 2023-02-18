@@ -24,6 +24,8 @@ function Home(props) {
     location: props.location,
     locationID: props.locationID,
     locationName: props.locationName,
+    locationUSCA: props.locationUSCA,
+    locationState: props.locationState,
     breadcrumbs: breadcrumbs,
     setBreadCrumbs: setBreadCrumbs,
     setTaxonID: props.setTaxonID,
