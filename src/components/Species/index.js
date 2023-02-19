@@ -2,6 +2,26 @@ import {useState, useEffect, useContext} from 'react';
 import {DataContext} from '../Home';
 import { LinkContainer } from 'react-router-bootstrap';
 import parse from 'html-react-parser';
+import invasiveplantsma from '../../invasive_plants_ma.txt';
+import invasiveplantstx from '../../invasive_plants_tx.txt';
+
+//load invasive plant text files into arrays
+let arrInvasivePlantsMA = [];
+let arrInvasivePlantsTX = [];
+
+fetch(invasiveplantsma)
+  .then(row => row.text())
+  .then(text => {
+    let arrTemp = text.split('\n');
+    arrInvasivePlantsMA = [...arrTemp];
+  });
+fetch(invasiveplantstx)
+  .then(row => row.text())
+  .then(text => {
+    let arrTemp = text.split('\n');
+    arrInvasivePlantsTX = [...arrTemp];
+  });
+
 
 const Species = (props) => {
   const dataContext = useContext(DataContext);
@@ -58,6 +78,10 @@ const Species = (props) => {
   //data from natureserve
   const calcNatureServe = () => {
     let returntext = '';
+    let invasive = false;
+
+    //first check if an invasive plant in TX or MA
+
 
     //only return results if one match, in US/Canada
     if ((nsData.resultsSummary) && (JSON.stringify(nsData.resultsSummary.totalResults) == "1") && ((dataContext.locationUSCA == "CA") || (dataContext.locationUSCA == "US"))) {
@@ -66,12 +90,24 @@ const Species = (props) => {
           if (JSON.stringify(nation.nationCode) == '"'+dataContext.locationUSCA+'"') {
             for (const subnation of nation.subnations) {
               if (JSON.stringify(subnation.subnationCode) == '"'+dataContext.locationState+'"') {
+                //first check if on invasive plants list
+                if (dataContext.locationState == "MA") {
+                  if (arrInvasivePlantsMA.includes(props.scientificname)) {
+                    invasive = true;
+                  }
+                } else if (dataContext.locationState == "TX") {
+                  if (arrInvasivePlantsTX.includes(props.scientificname)) {
+                    invasive = true;
+                  }
+                }
+
                 //check if native
-                if (subnation.native) {
+                if (invasive) {
+                  returntext = returntext +  "<span className='font-normal text-sm' style='color:red'>invasive!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>";
+                } else if (subnation.native) {
                   returntext = returntext +  "<span className='font-normal text-sm' style='color:green'>native&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>";
                   //returntext = returntext + " " + JSON.stringify(subnation);
-                }
-                if (subnation.exotic) {
+                } else if (subnation.exotic) {
                   returntext = returntext +  "<span className='font-normal text-sm' style='color:purple'>exotic&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>";
                   //returntext = returntext + " " + JSON.stringify(subnation);
                 }
